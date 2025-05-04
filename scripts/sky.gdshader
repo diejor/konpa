@@ -17,7 +17,6 @@ struct Ray {
 
 ///////////////////////
 // OCEAN FUNCTIONS   //
-// adapted from afl_ext (Shadertoy)
 ///////////////////////
 #define DRAG_MULT 0.8 // how much waves pull on the water
 #define WATER_DEPTH 0.6 // water depth
@@ -109,84 +108,17 @@ float getWater(vec3 origin, vec3 dir) {
 }
 
 ///////////////////////
-// CLOUD FUNCTIONS   //
-///////////////////////
-// Spiral noise from Shadertoy (modified for 3D)
-const float nudge = 0.739513;
-const float normalizer = 1.0 / sqrt(1.0 + nudge * nudge);
-float SpiralNoiseC(vec3 p) {
-    float n = 0.0;
-    float iter = 1.0;
-    for (int i = 0; i < 6; i++) {
-        vec3 spin = sin(p * iter);
-        n += -abs(spin.x + spin.y + spin.z) / iter;
-        p.xy += vec2(p.y, -p.x) * nudge;
-        p.xy *= normalizer;
-        p.xz += vec2(p.z, -p.x) * nudge;
-        p.xz *= normalizer;
-        iter *= 1.733733;
-    }
-    return n;
-}
-
-const float cloudHeight = 2.0;
-float getCloud(vec3 pos, float height, vec2 resolution) {
-    float cloudNoise = SpiralNoiseC(pos * 0.5);
-    float heightFalloff = max(pow(pos.y - height, 0.8), 0.0) * 0.1;
-    float coverage = 0.2 * (iMouse.y / resolution.y);
-    if(iMouse.x + iMouse.y == 0.0)
-        coverage = 0.4;
-    cloudNoise = cloudNoise * 0.05 + coverage + heightFalloff + sin(TIME * 0.0005) * 0.1;
-    return max(cloudNoise, -pos.y + height + 1.0);
-}
-
-vec3 cloudNormal(vec3 pos, float height, vec2 resolution) {
-    float e = 0.01;
-    return normalize(vec3(
-        getCloud(pos + vec3(e, 0.0, 0.0), height, resolution) - getCloud(pos - vec3(e, 0.0, 0.0), height, resolution),
-        getCloud(pos + vec3(0.0, e, 0.0), height, resolution) - getCloud(pos - vec3(0.0, e, 0.0), height, resolution),
-        getCloud(pos + vec3(0.0, 0.0, e), height, resolution) - getCloud(pos - vec3(0.0, 0.0, e), height, resolution)
-    ));
-}
-
-vec4 cloudmarch(Ray ray, vec2 resolution) {
-    vec3 shift = vec3(TIME * 0.05, 0.0, TIME * 0.1);
-    float dist = (1.0 + cloudHeight) / ray.dir.y;
-    for (int i = 0; i < 256; i++) {
-        if(dist > 50.0)
-            break;
-        vec3 pos = ray.origin + ray.dir * dist;
-        float cloud = getCloud(pos + shift, ray.origin.y + cloudHeight, resolution);
-        if(cloud < 0.0) {
-            vec3 n = cloudNormal(pos + shift, ray.origin.y + cloudHeight, resolution);
-            vec3 sundir = getSunDirection();
-            float diffuse = smoothstep(0.69, 0.71, max(0.0, dot(n, sundir)));
-            return vec4(vec3((float(i)/100.0)*0.1 + diffuse * 0.5 + 0.75), 1.0);
-        }
-        dist += max(cloud, 0.01);
-    }
-    return vec4(0.0);
-}
-
-vec3 getSky(Ray ray, vec2 resolution) {
-    vec3 atmosphere = extra_cheap_atmosphere(ray.dir, getSunDirection()) * 0.5;
-    float sun = pow(max(0.0, dot(ray.dir, getSunDirection())), 720.0) * 210.0;
-    vec4 clouds = cloudmarch(ray, resolution);
-    return mix(min(atmosphere + sun, 1.0), clouds.xyz, pow(clouds.a, 3.0));
-}
-
-///////////////////////
 // MAIN SKY FUNCTION //
 ///////////////////////
-// In a sky shader, the built-ins POSITION and EYEDIR give the camera's world position and the viewing direction.
-// We construct a ray from these, then choose to render sky or water based on the ray direction.
 void sky() {
     Ray ray;
     ray.origin = POSITION;
     ray.dir = EYEDIR;
 
     if (ray.dir.y >= 0.0) {
-        COLOR = getSky(ray, iResolution);
+        vec3 atmosphere = extra_cheap_atmosphere(ray.dir, getSunDirection()) * 0.5;
+        float sun = pow(max(0.0, dot(ray.dir, getSunDirection())), 720.0) * 210.0;
+        COLOR = mix(atmosphere + sun, vec3(0.0), 0.5); // Remove clouds and make sky simpler
         ALPHA = 1.0;
     } else {
         float dist = getWater(ray.origin, ray.dir);
@@ -195,11 +127,10 @@ void sky() {
         n = mix(n, vec3(0.0, 1.0, 0.0), 0.7 * min(1.0, sqrt(dist * 0.01) * 1.1));
         vec3 r = normalize(reflect(ray.dir, n));
         r.y = abs(r.y);
-        vec3 reflection = getSky(Ray(hit, r), iResolution);
+        vec3 reflection = extra_cheap_atmosphere(r, getSunDirection()) * 0.5;
         float fresnel = 0.04 + (1.0 - 0.04) * pow(1.0 - max(0.0, dot(-n, ray.dir)), 5.0);
         fresnel = round(fresnel * 5.0) / 5.0;
-        vec3 scattering = vec3(0.0293, 0.0698, 0.1717) * 0.5 * (0.5 + (hit.y + WATER_DEPTH) / WATER_DEPTH);
-        vec3 col = mix(vec3(0.06, 0.1, 0.3), reflection, fresnel) + scattering;
+        vec3 col = mix(vec3(0.06, 0.1, 0.3), reflection, fresnel);
         COLOR = col;
         ALPHA = 1.0;
     }
