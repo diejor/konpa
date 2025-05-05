@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://h4i6yl7wimg4"]
+
+[ext_resource type="Script" uid="uid://dnsbwvbh5k3k8" path="res://levels/level_5.gd" id="1_26h77"]
+[ext_resource type="PackedScene" uid="uid://cecd8terhsui" path="res://maps/level_5_map.tscn" id="1_erq1u"]
+[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://ball.tscn" id="2_yaabq"]
+[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://water.tscn" id="3_r02ll"]
+[ext_resource type="PackedScene" uid="uid://4k5hkwdn8ca8" path="res://background.tscn" id="4_26h77"]
+
+[node name="level5" type="Node3D"]
+script = ExtResource("1_26h77")
+
+[node name="level5map" parent="." instance=ExtResource("1_erq1u")]
+
+[node name="ball" parent="." instance=ExtResource("2_yaabq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64185, 18.7844, 7.58566)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="killzone" parent="." instance=ExtResource("3_r02ll")]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -100, 0)
+
+[node name="blue sky" parent="." instance=ExtResource("4_26h77")]

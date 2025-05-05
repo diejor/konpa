@@ -1,0 +1,135 @@
+[gd_scene load_steps=8 format=3 uid="uid://der446vbmj4dq"]
+
+[ext_resource type="Texture2D" uid="uid://basjiuwkudbo3" path="res://blue background for game.png" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://4bpr6p6kmpk4" path="res://main_menu.gd" id="1_7vrkn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]
+texture = ExtResource("1_06t4h")
+modulate_color = Color(0.493545, 0.493546, 0.493546, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_06t4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06t4h"]
+bg_color = Color(0.589096, 0.589096, 0.589096, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+bg_color = Color(0.273873, 0.273873, 0.273873, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhts7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7vrkn")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7vrkn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -97.0
+offset_right = 202.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_06t4h")
+theme_override_styles/hover = SubResource("StyleBoxFlat_06t4h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_06t4h")
+theme_override_styles/hover = SubResource("StyleBoxFlat_06t4h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
+text = "How to Play"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_06t4h")
+theme_override_styles/hover = SubResource("StyleBoxFlat_06t4h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
+text = "Exit
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -271.0
+offset_right = 174.0
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 61
+text = "Balance Ball"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_homehowtoplay_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_homeexit_pressed"]

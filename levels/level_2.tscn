@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ktdxaegj7bqv"]
+
+[ext_resource type="PackedScene" uid="uid://brcnn25fw0hg1" path="res://scenes/background.tscn" id="1_0srwa"]
+[ext_resource type="PackedScene" uid="uid://cuc014mwe3d15" path="res://maps/level_2_map.tscn" id="2_v5uil"]
+[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="3_5722l"]
+[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://scenes/water.tscn" id="4_v5uil"]
+
+[node name="Level2" type="Node3D"]
+
+[node name="Node3D" parent="." instance=ExtResource("1_0srwa")]
+
+[node name="ball" parent="." instance=ExtResource("3_5722l")]
+transform = Transform3D(1, 0.000111312, -1.81878e-05, -0.000111312, 1, 8.23061e-05, 1.81878e-05, -8.23061e-05, 1, 0, 2.63303, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Node3D2" parent="." instance=ExtResource("4_v5uil")]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -100, 0)
+
+[node name="level2map" parent="." instance=ExtResource("2_v5uil")]
