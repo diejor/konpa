@@ -20,3 +20,9 @@ shadow_enabled = true
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -100, 0)
 
 [node name="level2map" parent="." instance=ExtResource("2_v5uil")]
+script = null
+
+[node name="MapManager" parent="level2map" index="2"]
+prev_scene = "res://levels/level_1.tscn"
+
+[editable path="level2map"]

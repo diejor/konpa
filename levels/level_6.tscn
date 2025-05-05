@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cf4u30wy4n4v1"]
 
-[ext_resource type="PackedScene" uid="uid://bqwq3j6vpkpkd" path="res://maps/level6map.tscn" id="1_s4mq8"]
-[ext_resource type="Script" uid="uid://dk53bj7hfdnus" path="res://levels/level_4.gd" id="1_t6q73"]
-[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://ball.tscn" id="2_t0qhu"]
-[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://water.tscn" id="3_t6q73"]
-[ext_resource type="PackedScene" uid="uid://4k5hkwdn8ca8" path="res://background.tscn" id="5_hokjj"]
+[ext_resource type="PackedScene" uid="uid://bqwq3j6vpkpkd" path="res://maps/level_6_map.tscn" id="1_s4mq8"]
+[ext_resource type="Script" uid="uid://vewostakif5v" path="res://levels/level_4.gd" id="1_t6q73"]
+[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_t0qhu"]
+[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://scenes/water.tscn" id="3_t6q73"]
+[ext_resource type="PackedScene" path="res://background.tscn" id="5_hokjj"]
 
 [node name="level4" type="Node3D"]
 script = ExtResource("1_t6q73")

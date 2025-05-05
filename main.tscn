@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=4 uid="uid://d4by6hiayt21q"]
 
 [ext_resource type="Shader" uid="uid://b1f6s1v3cdjjd" path="res://scripts/sky.gdshader" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://dc07bjajy36wh" path="res://scripts/level.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://dc07bjajy36wh" path="res://scripts/spin_platform.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://b3w0vbsr6eke4" path="res://scripts/camera_3d.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://cc0qhpi883v5a" path="res://scripts/player.gd" id="4_1bvp3"]
 

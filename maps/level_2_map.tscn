@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cuc014mwe3d15"]
 
-[ext_resource type="PackedScene" uid="uid://csvqr0rfobesr" path="res://scenes/level1test.tscn" id="1_wjabl"]
-[ext_resource type="Script" uid="uid://pnm8a732cqdw" path="res://maps/level_2_map.gd" id="2_pk3a7"]
+[ext_resource type="PackedScene" uid="uid://csvqr0rfobesr" path="res://maps/level_1_map.tscn" id="1_wjabl"]
+[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://maps/map_manager.tscn" id="3_mnfuu"]
 
 [node name="level2map" instance=ExtResource("1_wjabl")]
 transform = Transform3D(0.999997, -0.00221733, -0.000972571, 0.00221829, 0.999997, 0.000994632, 0.000970382, -0.000996768, 0.999999, 0, 0, 0)
-script = ExtResource("2_pk3a7")
 
 [node name="GridMap" parent="." index="0"]
 transform = Transform3D(1, -4.83169e-11, 0, -8.52651e-11, 1, 0, 5.82077e-11, 0, 1, 0, 0, 0)
@@ -19,3 +18,7 @@ NEXT_LEVEL = "uid://dwdeetug0g4p1"
 
 [node name="CollisionShape3D" parent="VictoryZone" index="0"]
 transform = Transform3D(0.999997, 0.000713559, -0.00350612, -0.000718703, 0.999999, -0.00146833, 0.00350508, 0.00147084, 0.999995, -1.0874, 0.00766283, -38.8938)
+
+[node name="MapManager" parent="." index="2" instance=ExtResource("3_mnfuu")]
+prev_scene = "res://levels/level_2.tscn"
+next_scene = "res://levels/level_3.tscn"

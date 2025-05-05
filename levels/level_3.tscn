@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwdeetug0g4p1"]
 
-[ext_resource type="Script" uid="uid://dtv6lpb4rq7lu" path="res://levels/level_3.gd" id="1_20opy"]
+[ext_resource type="Script" uid="uid://dcqnfv8w0mn26" path="res://levels/level_3.gd" id="1_20opy"]
 [ext_resource type="PackedScene" uid="uid://e7rqh4wkbnvw" path="res://maps/level_3_map.tscn" id="1_gew73"]
-[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://ball.tscn" id="2_bmgug"]
-[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://water.tscn" id="3_20opy"]
-[ext_resource type="PackedScene" uid="uid://4k5hkwdn8ca8" path="res://background.tscn" id="4_bmgug"]
+[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_bmgug"]
+[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://scenes/water.tscn" id="3_20opy"]
+[ext_resource type="PackedScene" uid="uid://brcnn25fw0hg1" path="res://scenes/background.tscn" id="4_bmgug"]
 
 [node name="level3" type="Node3D"]
 script = ExtResource("1_20opy")
