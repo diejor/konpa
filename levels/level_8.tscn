@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cli3sx04xwqnf"]
+[gd_scene load_steps=3 format=3 uid="uid://cli3sx04xwqnf"]
 
 [ext_resource type="PackedScene" uid="uid://rqpsmhysy13h" path="res://maps/level_8_map.tscn" id="1_rmft0"]
-[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://ball.tscn" id="2_4kux0"]
-[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://water.tscn" id="3_fxq3v"]
-[ext_resource type="PackedScene" uid="uid://4k5hkwdn8ca8" path="res://background.tscn" id="4_4gm13"]
+[ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_4kux0"]
 
 [node name="level8" type="Node3D"]
 
@@ -15,8 +13,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.55366, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
-
-[node name="killzone" parent="." instance=ExtResource("3_fxq3v")]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -100, 0)
-
-[node name="blue sky" parent="." instance=ExtResource("4_4gm13")]

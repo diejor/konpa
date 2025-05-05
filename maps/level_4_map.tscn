@@ -1,14 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh8i68412kjpd"]
+[gd_scene load_steps=6 format=3 uid="uid://dh8i68412kjpd"]
 
+[ext_resource type="Script" uid="uid://dc07bjajy36wh" path="res://scripts/spin_platform.gd" id="1_073e3"]
 [ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://assets/models/blocks.meshlib" id="1_ikt5k"]
-[ext_resource type="Script" uid="uid://bh01xgwbrsrxl" path="res://maps/level_4_map.gd" id="1_iplu6"]
 [ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="3_073e3"]
+[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://maps/map_manager.tscn" id="4_e4vov"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_073e3"]
 size = Vector3(2, 2.47437, 2)
 
-[node name="level4map" type="Node3D"]
-script = ExtResource("1_iplu6")
+[node name="level4map" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+script = ExtResource("1_073e3")
+metadata/_custom_type_script = "uid://dc07bjajy36wh"
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_ikt5k")
@@ -25,5 +30,9 @@ NEXT_LEVEL = "uid://h4i6yl7wimg4"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VictoryZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2375, 2.73311, 45.4634)
 shape = SubResource("BoxShape3D_073e3")
+
+[node name="MapManager" parent="." instance=ExtResource("4_e4vov")]
+prev_scene = "res://levels/level_3.tscn"
+next_scene = "res://levels/level_5.tscn"
 
 [connection signal="body_entered" from="VictoryZone" to="VictoryZone" method="_on_body_entered"]

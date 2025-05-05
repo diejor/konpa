@@ -355,7 +355,6 @@ contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("4_1bvp3")
 speed_factor = 1.0
-angular_damping_coefficient = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("SphereShape3D_1bvp3")

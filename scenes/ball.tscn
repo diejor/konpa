@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://4i7tn4ht17gs"]
+[gd_scene load_steps=8 format=3 uid="uid://4i7tn4ht17gs"]
 
 [ext_resource type="Texture2D" uid="uid://ca2e4crgppbkh" path="res://assets/textures/pixar-ball.png" id="1_41u45"]
-[ext_resource type="Script" uid="uid://bx0y5nfxiywik" path="res://scripts/ball.gd" id="1_ktgx5"]
+[ext_resource type="Script" uid="uid://cc0qhpi883v5a" path="res://scripts/player.gd" id="1_f7cbr"]
 [ext_resource type="ArrayMesh" uid="uid://b6ahns42mup01" path="res://assets/models/pixar-ball.obj" id="2_ktgx5"]
+[ext_resource type="PackedScene" uid="uid://baetbwqi5yfji" path="res://scenes/level_camera.tscn" id="4_4dx81"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f7cbr"]
+absorbent = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hgol0"]
 radius = 1.0
@@ -13,7 +17,9 @@ roughness = 0.4
 
 [node name="ball" type="RigidBody3D"]
 disable_mode = 2
-script = ExtResource("1_ktgx5")
+physics_material_override = SubResource("PhysicsMaterial_f7cbr")
+gravity_scale = 3.0
+script = ExtResource("1_f7cbr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_hgol0")
@@ -22,9 +28,7 @@ shape = SubResource("SphereShape3D_hgol0")
 material_override = SubResource("StandardMaterial3D_n5601")
 mesh = ExtResource("2_ktgx5")
 
-[node name="CameraRig" type="Marker3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="CameraRig"]
-transform = Transform3D(0.999994, 0.00349065, 0, -0.00267399, 0.76604, 0.642788, 0.00224375, -0.642784, 0.766044, 0, 15.0554, 15)
-
-[node name="Ray" type="RayCast3D" parent="."]
+[node name="LevelCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_4dx81")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+target = NodePath("..")
+offset = Vector3(0, 10, 5)

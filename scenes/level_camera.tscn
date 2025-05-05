@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://baetbwqi5yfji"]
+
+[ext_resource type="Script" uid="uid://b3w0vbsr6eke4" path="res://scripts/camera_3d.gd" id="1_2s1fn"]
+
+[node name="LevelCamera" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+top_level = true
+script = ExtResource("1_2s1fn")
+offset = Vector3(0, 5, 10)
+speed_xz = 10.0
+speed_y = 5.0

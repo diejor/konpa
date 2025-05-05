@@ -2,9 +2,9 @@ class_name SpinPlatform
 extends RigidBody3D
 
 # ───── Tunables ────────────────────────────────────────────────────────── #
-@export var drag_radius_px        := 150.0
-@export var KP                    := 250.0
-@export var KD                    := 100.0
+@export var drag_radius_px        := 1800.0
+@export var KP                    := 50.0
+@export var KD                    := 50.0
 @export var responsiveness_boost  := 1.5
 @export var max_torque            := 500.0
 # ───────────────────────────────────────────────────────────────────────── #

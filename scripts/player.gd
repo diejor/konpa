@@ -9,7 +9,7 @@ so it can never outrun (or tunnel through) the floor.
 @export var impulse_threshold             : float = 1.0   # ignore tiny spins
 @export var speed_factor                  : float = 1.05  # allow ±5% slip over surface speed
 @export var damping_coefficient           : float = 1.0   # “b” in τ_drag = –b·v (linear tangential)
-@export var angular_damping_coefficient   : float = 1.0   # base scale for angular drag (see below)
+@export var angular_damping_coefficient   : float = 0.1   # base scale for angular drag (see below)
 
 func _ready() -> void:
 	contact_monitor       = true
@@ -82,6 +82,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 		# apply impulse & clamp
 		var dv = v_target - v_old
+		print(dv)
 		state.apply_central_impulse(dv * inv_m)
 
 		var surface_speed = omega_mag * r_len

@@ -1,24 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf4u30wy4n4v1"]
+[gd_scene load_steps=3 format=3 uid="uid://cf4u30wy4n4v1"]
 
 [ext_resource type="PackedScene" uid="uid://bqwq3j6vpkpkd" path="res://maps/level_6_map.tscn" id="1_s4mq8"]
-[ext_resource type="Script" uid="uid://vewostakif5v" path="res://levels/level_4.gd" id="1_t6q73"]
 [ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_t0qhu"]
-[ext_resource type="PackedScene" uid="uid://jtyp658wkhft" path="res://scenes/water.tscn" id="3_t6q73"]
-[ext_resource type="PackedScene" path="res://background.tscn" id="5_hokjj"]
 
-[node name="level4" type="Node3D"]
-script = ExtResource("1_t6q73")
+[node name="level6" type="Node3D"]
 
 [node name="level4map" parent="." instance=ExtResource("1_s4mq8")]
 
 [node name="ball" parent="." instance=ExtResource("2_t0qhu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81076, 2.56862, 0.12859)
-
-[node name="killzone" parent="." instance=ExtResource("3_t6q73")]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -100, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.13235, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
-
-[node name="Node3D2" parent="." instance=ExtResource("5_hokjj")]
