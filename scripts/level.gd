@@ -59,10 +59,6 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var q_now = state.transform.basis.get_rotation_quaternion()
 	var q_err = q_now.inverse() * _desired_q
 	var angle = q_err.get_angle()
-	if angle > PI: angle -= TAU
-	if abs(angle) < EPS:
-		_prev_angle = 0.0
-		return
 
 	var axis = q_err.get_axis().normalized()
 	var gain = KP
