@@ -1,19 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://csvqr0rfobesr"]
+[gd_scene load_steps=5 format=3 uid="uid://csvqr0rfobesr"]
 
-[ext_resource type="Script" uid="uid://dc07bjajy36wh" path="res://scripts/spin_platform.gd" id="1_v5axa"]
 [ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://assets/models/blocks.meshlib" id="1_w7o5j"]
 [ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="2_v5axa"]
-[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://maps/map_manager.tscn" id="3_jqtfp"]
+[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://levels/map_manager.tscn" id="3_jqtfp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qsdks"]
 size = Vector3(2, 2.47437, 2)
 
-[node name="level1map" type="RigidBody3D"]
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-script = ExtResource("1_v5axa")
-metadata/_custom_type_script = "uid://dc07bjajy36wh"
+[node name="level1map" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_w7o5j")

@@ -2,9 +2,14 @@
 extends Camera3D
 
 @export var target: Node3D
-@export var offset: Vector3 = Vector3(0, 3, -8)
+
 @export var speed_xz: float = 5.0    # how fast to catch up horizontally
 @export var speed_y: float  = 1.0    # how fast to catch up vertically
+
+var offset: Vector3
+
+func _ready() -> void:
+	offset = position
 
 func _process(delta: float) -> void:
 	if not target:

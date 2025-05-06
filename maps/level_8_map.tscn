@@ -2,7 +2,7 @@
 
 [ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://assets/models/blocks.meshlib" id="1_a644s"]
 [ext_resource type="Script" uid="uid://dc07bjajy36wh" path="res://scripts/spin_platform.gd" id="1_ii1p3"]
-[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://maps/map_manager.tscn" id="3_ii1p3"]
+[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://levels/map_manager.tscn" id="3_ii1p3"]
 [ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="3_x4jx6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ii1p3"]

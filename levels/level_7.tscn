@@ -1,15 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0yobmx2bwkgc"]
+[gd_scene load_steps=6 format=3 uid="uid://b0yobmx2bwkgc"]
 
-[ext_resource type="PackedScene" uid="uid://bgby72dr3ah0j" path="res://maps/level_7_map.tscn" id="1_e8mof"]
+[ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://levels/map_manager.tscn" id="1_e8mof"]
 [ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_jgr6b"]
+[ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://assets/models/blocks.meshlib" id="3_jgr6b"]
+[ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="4_vendn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ocykx"]
+size = Vector3(2, 2.47437, 2)
 
 [node name="level7" type="Node3D"]
 
-[node name="level7map" parent="." instance=ExtResource("1_e8mof")]
+[node name="MapManager" parent="." instance=ExtResource("1_e8mof")]
+prev_scene = "res://levels/level_6.tscn"
+next_scene = "res://levels/level_8.tscn"
 
 [node name="ball" parent="." instance=ExtResource("2_jgr6b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.587813, 2.64995, -0.241907)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("3_jgr6b")
+data = {
+"cells": PackedInt32Array(65534, 0, 655362, 0, 0, 1441794, 65534, 65534, 655361, 65534, 65532, 655361, 65534, 65530, 655361, 65534, 65528, 655361, 65534, 65526, 1048578, 0, 65526, 1048577, 2, 65526, 1048577, 2, 65527, 655363, 0, 65527, 1441792, 4, 65526, 1048577, 4, 65527, 1048576, 6, 65527, 1441793, 7, 65527, 1441794, 7, 65525, 1, 6, 65525, 1048576, 7, 65523, 1, 7, 65521, 1, 7, 65519, 1, 7, 65517, 1, 7, 65515, 1, 7, 65513, 2, 6, 65523, 0, 6, 65521, 0, 6, 65519, 0, 6, 65517, 0, 6, 65515, 0, 5, 65513, 1048577, 3, 65513, 1048577, 4, 65515, 1048576, 1, 65513, 1048577, 65535, 65513, 1048577, 65533, 65513, 1048577, 65531, 65513, 1048577, 65529, 65513, 1048577, 65527, 65513, 1048577, 65525, 65513, 1048577, 65523, 65513, 1048577, 65521, 65513, 1048577, 65519, 65513, 1048577, 65517, 65513, 1048578, 65517, 65515, 655361, 65519, 65515, 655360, 65517, 65517, 655361, 65517, 65519, 655360, 65517, 65521, 655360, 65517, 65523, 655361, 65517, 65525, 655361, 65517, 65527, 655362, 65519, 65527, 1441793, 65521, 65527, 1441793, 65523, 65527, 1441793, 65525, 65525, 0, 65523, 65525, 0, 65521, 65525, 0, 65519, 65525, 0, 65525, 65527, 0, 65525, 65529, 0, 65525, 65531, 0, 65525, 65533, 0, 65524, 65535, 655361, 65526, 65535, 1, 65526, 1, 1, 65524, 1, 655361, 65525, 3, 655365, 65527, 3, 1, 65523, 3, 655361, 65527, 5, 1441794, 65523, 5, 655362, 65525, 5, 1441793, 3, 65527, 655363, 1, 65527, 655360, 0, 65534, 1, 0, 65532, 1, 0, 65530, 0, 0, 65528, 0, -17, 65515, 524288, -19, 65515, 524288, -17, 65513, 524288, -19, 65513, 524288, 65526, 65533, 1, 65526, 65531, 1, 65525, 65526, 0, 65526, 65529, 1, 65526, 65527, 1, 65526, 65525, 2, 65524, 65525, 1048577, 65518, 65523, 1441792, 65518, 65521, 1441792, 65518, 65519, 1441792, 65518, 65517, 1441792, 65519, 65516, 1441792, 65520, 65516, 1441792, 65520, 65515, 1441792)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="VictoryZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2658, 0.810965, 1.52127)
+script = ExtResource("4_vendn")
+NEXT_LEVEL = "uid://cli3sx04xwqnf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VictoryZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6032, -1.04245, 5.388)
+shape = SubResource("BoxShape3D_ocykx")
+
+[connection signal="body_entered" from="VictoryZone" to="VictoryZone" method="_on_body_entered"]
