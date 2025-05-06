@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuuf8x066uifc"]
+[gd_scene load_steps=4 format=3 uid="uid://cuuf8x066uifc"]
 
 [ext_resource type="PackedScene" uid="uid://7m5vxwnficji" path="res://scenes/background.tscn" id="1_og0lm"]
-[ext_resource type="PackedScene" uid="uid://div8yn1xg3pwb" path="res://levels/level_1.tscn" id="2_nb6tx"]
+[ext_resource type="PackedScene" uid="uid://div8yn1xg3pwb" path="res://levels/level_1.tscn" id="2_18lod"]
+[ext_resource type="Script" uid="uid://bx7l2qi1wkmg5" path="res://levels/map_viewport.gd" id="2_gnv65"]
 
 [node name="Kernel" type="Node"]
 
@@ -20,5 +21,6 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
+script = ExtResource("2_gnv65")
 
-[node name="Level1" parent="Map/MapViewport" instance=ExtResource("2_nb6tx")]
+[node name="Level1" parent="Map/MapViewport" instance=ExtResource("2_18lod")]

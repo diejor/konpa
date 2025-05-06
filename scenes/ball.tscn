@@ -15,6 +15,7 @@ roughness = 0.4
 [node name="ball" type="RigidBody3D"]
 disable_mode = 2
 gravity_scale = 0.0
+linear_damp = 1.0
 script = ExtResource("1_f7cbr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

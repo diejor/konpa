@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://7m5vxwnficji"]
 
-[ext_resource type="Shader" uid="uid://b1f6s1v3cdjjd" path="res://scripts/sky.gdshader" id="1_bkp1e"]
+[ext_resource type="Shader" uid="uid://c7wffalby3kgg" path="res://scripts/ocean.gdshader" id="1_bkp1e"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kx6l7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0upk"]
 shader = ExtResource("1_bkp1e")
-shader_parameter/iMouse = Vector2(0, 0)
+shader_parameter/iMouse = Vector2(0.36, 0)
 shader_parameter/iResolution = Vector2(1152, 648)
 
 [sub_resource type="Sky" id="Sky_n46q3"]
-sky_material = SubResource("ShaderMaterial_kx6l7")
+sky_material = SubResource("ShaderMaterial_y0upk")
 
 [sub_resource type="Environment" id="Environment_btoec"]
 background_mode = 2
@@ -32,7 +32,7 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="BackgroundViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 10, 10)
 cull_mask = 0
 current = true
 fov = 80.0

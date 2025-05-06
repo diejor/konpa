@@ -2,6 +2,8 @@ extends Area3D
 
 @export_file("*.tscn") var NEXT_LEVEL = ""
 
+@onready var map_manager = $"../MapManager"
+
 func _on_body_entered(body: Node3D) -> void:
 	if body.name == "ball":
-		get_tree().change_scene_to_file(NEXT_LEVEL)
+		map_manager._change_scene_in_place(NEXT_LEVEL)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://d4by6hiayt21q"]
+[gd_scene load_steps=30 format=4 uid="uid://b0teqv1ir8ib5"]
 
 [ext_resource type="Shader" uid="uid://b1f6s1v3cdjjd" path="res://scripts/sky.gdshader" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dc07bjajy36wh" path="res://scripts/spin_platform.gd" id="2_1bvp3"]
@@ -350,7 +350,6 @@ gravity_scale = 3.0
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("4_1bvp3")
-speed_factor = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("SphereShape3D_1bvp3")

@@ -1,56 +1,69 @@
+# Marble.gd - Optimized and clarified
+
 class_name Marble
 extends RigidBody3D
 
-@export var drag_radius_px : float = 1800.0
-@export var max_tilt_deg   : float = 180.0
-@export var tilt_speed     : float = 4.0
-@export var gravity_mag    : float = 9.8
-@export var g_scale  : float = 3.0
+# ────────────────────────── Tunables ────────────────────────── #
+@export var drag_radius_px: float = 1800.0    # Pixel radius for drag-to-tilt mapping
+@export var max_tilt_deg: float = 180.0       # Maximum tilt angle in degrees
+@export var tilt_speed: float = 4.0           # How quickly the marble tilts toward target
+@export var gravity_strength: float = 9.8     # Base gravity magnitude
+@export var gravity_s: float = 6.0        # Gravity force multiplier
 
-@onready var rc : RayCast3D = $Gravity
+# RayCast to visualize gravity direction in tool/editor
+@onready var gravity_ray: RayCast3D = $Gravity
 
-var _dragging    := false
-var _start_mouse = Vector2.ZERO
-var _desired_q   = Quaternion.IDENTITY
-var _current_q   = Quaternion.IDENTITY
+# ───────────────────────── State ───────────────────────────── #
+var dragging: bool = false
+var start_mouse_pos: Vector2 = Vector2.ZERO
+var target_rotation: Quaternion = Quaternion.IDENTITY
+var current_rotation: Quaternion = Quaternion.IDENTITY
 
-signal tilt_changed(q: Quaternion)
+signal tilt_changed(new_rotation: Quaternion)
 
-# ───────────────────────── Input → desired tilt ───────────────────────── #
+# ─────────────────────── Input Handling ────────────────────── #
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("click"):
-		_dragging    = true
-		_start_mouse = event.position
-	elif Input.is_action_just_released("click"):
-		_dragging    = false
-		_desired_q   = Quaternion.IDENTITY
-	elif _dragging and event is InputEventMouseMotion:
-		_desired_q = _mouse_to_quaternion(event.position)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# Begin dragging: record start and preserve current tilt
+			dragging = true
+			start_mouse_pos = event.position
+			target_rotation = current_rotation
+		else:
+			# End dragging: reset tilt to upright
+			dragging = false
+			target_rotation = Quaternion.IDENTITY
 
-func _mouse_to_quaternion(pos: Vector2) -> Quaternion:
-	var d  = (pos - _start_mouse) / drag_radius_px
-	var dx = clamp(d.y, -1.0, 1.0)             # pitch
-	var dy = clamp(-d.x, -1.0, 1.0)             # roll
+	elif dragging and event is InputEventMouseMotion:
+		# Update desired tilt based on mouse movement
+		target_rotation = _compute_target_rotation(event.position)
 
-	var pitch = deg_to_rad(max_tilt_deg) * dx
-	var roll  = deg_to_rad(max_tilt_deg) * dy
+# Maps mouse position difference to a tilt quaternion
+func _compute_target_rotation(mouse_pos: Vector2) -> Quaternion:
+	var delta = (mouse_pos - start_mouse_pos) / drag_radius_px
+	# Clamp vertical (pitch) and horizontal (roll) deltas
+	var pitch_amount = clamp(delta.y, -1.0, 1.0) * deg_to_rad(max_tilt_deg)
+	var roll_amount  = clamp(-delta.x, -1.0, 1.0) * deg_to_rad(max_tilt_deg)
 
-	var q_pitch = Quaternion(Vector3(-1, 0, 0), pitch)   # X
-	var q_roll  = Quaternion(Vector3(0, 0, -1), roll)    # Z (world‑right)
-	return q_roll * q_pitch                              # roll ∘ pitch
+	# Build quaternions: pitch around X, roll around Z
+	var pitch_q = Quaternion(Vector3.RIGHT, -pitch_amount)
+	var roll_q  = Quaternion(Vector3.FORWARD, roll_amount)
+	return roll_q * pitch_q  # apply roll then pitch
 
-# ───────────────────────── Physics & gravity ──────────────────────────── #
+# ─────────────────── Physics Processing ────────────────────── #
 func _physics_process(delta: float) -> void:
-	_current_q = _current_q.slerp(_desired_q, clamp(tilt_speed * delta, 0.0, 1.0))
-	emit_signal("tilt_changed", _current_q)
+	# Smoothly interpolate toward desired tilt
+	var t = clamp(tilt_speed * delta, 0.0, 1.0)
+	current_rotation = current_rotation.slerp(target_rotation, t)
+	emit_signal("tilt_changed", current_rotation)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	var g_world = _current_q * Vector3(0, -gravity_mag, 0)
+	# Rotate gravity vector by current tilt
+	var gravity_dir = current_rotation * Vector3.DOWN * gravity_strength
+	# Apply force: F = m * g
+	state.apply_central_force(gravity_dir * gravity_s)
 
-	state.apply_central_force(g_world * g_scale)  # F = m g
-	
-	var cast_length = 0.5
-
-	var world_end = global_transform.origin + g_world * cast_length
-
-	rc.target_position = rc.to_local(world_end)
+	# Update raycast target to visualize gravity direction
+	var ray_length = 10.
+	var world_end = global_transform.origin + gravity_dir.normalized() * ray_length
+	gravity_ray.target_position = gravity_ray.to_local(world_end)
