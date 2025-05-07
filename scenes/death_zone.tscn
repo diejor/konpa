@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://xyvakbks11ij"]
+
+[ext_resource type="Script" uid="uid://tqpmfm15et2l" path="res://scripts/death_zone.gd" id="1_orvjg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kx6l7"]
+size = Vector3(10000, 10, 10000)
+
+[node name="DeathZone" type="Area3D"]
+script = ExtResource("1_orvjg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+shape = SubResource("BoxShape3D_kx6l7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

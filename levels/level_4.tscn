@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhjwpngobl8t3"]
+[gd_scene load_steps=7 format=3 uid="uid://dhjwpngobl8t3"]
 
 [ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://levels/map_manager.tscn" id="1_t0qhu"]
 [ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_t0qhu"]
+[ext_resource type="PackedScene" uid="uid://xyvakbks11ij" path="res://scenes/death_zone.tscn" id="2_t6q73"]
 [ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://resources/blocks.meshlib" id="3_t6q73"]
 [ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="4_hokjj"]
 
@@ -13,9 +14,12 @@ size = Vector3(2, 2.47437, 2)
 [node name="MapManager" parent="." instance=ExtResource("1_t0qhu")]
 prev_scene = "res://levels/level_3.tscn"
 next_scene = "res://levels/level_5.tscn"
+current_scene = "res://levels/level_4.tscn"
+
+[node name="DeathZone" parent="MapManager" instance=ExtResource("2_t6q73")]
 
 [node name="ball" parent="." instance=ExtResource("2_t0qhu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93082, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.833952, 2.13497, 0)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("3_t6q73")

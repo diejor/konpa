@@ -175,32 +175,36 @@ vec3 getSky(Ray ray, vec2 resolution) {
     return mix(min(atmosphere + sun, 1.0), clouds.xyz, pow(clouds.a, 3.0));
 }
 
-///////////////////////
-// MAIN SKY FUNCTION //
-///////////////////////
-// In a sky shader, the built-ins POSITION and EYEDIR give the camera's world position and the viewing direction.
-// We construct a ray from these, then choose to render sky or water based on the ray direction.
-void sky() {
-    Ray ray;
-    ray.origin = POSITION;
-    ray.dir = EYEDIR;
 
+void sky() {
+    // 1. Setup ray
+	Ray ray;
+	ray.origin = POSITION;
+	ray.dir = EYEDIR;
+
+    // 2. Choose sky or water path
     if (ray.dir.y >= 0.0) {
         COLOR = getSky(ray, iResolution);
         ALPHA = 1.0;
     } else {
-        float dist = getWater(ray.origin, ray.dir);
-        vec3 hit = ray.origin + ray.dir * dist;
-        vec3 n = normal_func(hit.xz, 0.01, WATER_DEPTH);
-        n = mix(n, vec3(0.0, 1.0, 0.0), 0.7 * min(1.0, sqrt(dist * 0.01) * 1.1));
-        vec3 r = normalize(reflect(ray.dir, n));
-        r.y = abs(r.y);
-        vec3 reflection = getSky(Ray(hit, r), iResolution);
-        float fresnel = 0.04 + (1.0 - 0.04) * pow(1.0 - max(0.0, dot(-n, ray.dir)), 5.0);
-        fresnel = round(fresnel * 5.0) / 5.0;
-        vec3 scattering = vec3(0.0293, 0.0698, 0.1717) * 0.5 * (0.5 + (hit.y + WATER_DEPTH) / WATER_DEPTH);
-        vec3 col = mix(vec3(0.06, 0.1, 0.3), reflection, fresnel) + scattering;
-        COLOR = col;
+        // 3. Water intersection & normal
+        float d = getWater(ray.origin, ray.dir);
+        vec3 hit = ray.origin + ray.dir * d;
+        vec3 n = mix(
+            normal_func(hit.xz, 0.01, WATER_DEPTH),
+            vec3(0.0, 1.0, 0.0),
+            0.7 * min(1.0, sqrt(d * 0.01) * 1.1)
+        );
+
+        // 4. Reflection & Fresnel
+        vec3 r = normalize(reflect(ray.dir, n)); r.y = abs(r.y);
+        float f = round((0.04 + (1.0 - 0.04) * pow(1.0 - max(0.0, dot(-n, ray.dir)), 5.0)) * 5.0) / 5.0;
+
+        // 5. Combine sky reflection, base tint, and scattering
+        vec3 refl = getSky(Ray(hit, r), iResolution);
+        vec3 scatter = vec3(0.0293, 0.0698, 0.1717) * 0.5 * (0.5 + (hit.y + WATER_DEPTH) / WATER_DEPTH);
+        COLOR = mix(vec3(0.06, 0.1, 0.3), refl, f) + scatter;
         ALPHA = 1.0;
     }
 }
+

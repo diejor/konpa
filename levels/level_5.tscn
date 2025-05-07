@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://h4i6yl7wimg4"]
+[gd_scene load_steps=7 format=3 uid="uid://h4i6yl7wimg4"]
 
 [ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://levels/map_manager.tscn" id="1_r02ll"]
+[ext_resource type="PackedScene" uid="uid://xyvakbks11ij" path="res://scenes/death_zone.tscn" id="2_26h77"]
 [ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="2_yaabq"]
 [ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://resources/blocks.meshlib" id="3_26h77"]
 [ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="4_1y5xd"]
@@ -13,9 +14,10 @@ size = Vector3(2, 2.47437, 2)
 [node name="MapManager" parent="." instance=ExtResource("1_r02ll")]
 prev_scene = "res://levels/level_4.tscn"
 next_scene = "res://levels/level_6.tscn"
+current_scene = "res://levels/level_5.tscn"
 
 [node name="ball" parent="." instance=ExtResource("2_yaabq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64185, 18.7844, 7.58566)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2373, 18.1456, 7.58566)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("3_26h77")
@@ -23,6 +25,9 @@ data = {
 "cells": PackedInt32Array(524289, 5, 1441793, 589823, 5, 1441793, 589823, 3, 0, 524289, 3, 0, 524291, 5, 1441794, 524291, 3, 1, 589821, 3, 655361, 589821, 5, 655362, 589823, 1, 1441792, 524289, 1, 1441792, 589823, 65535, 1441792, 524289, 65535, 1441792, 524291, 1, 1, 524291, 65535, 1, 589821, 1, 655361, 589821, 65535, 655361, 393216, 65533, 655364, 458750, 65533, 655364, 393218, 65533, 655364, 327678, 65531, 655364, 262144, 65531, 655364, 262146, 65531, 655364, 196606, 65529, 655364, 131072, 65529, 655364, 131074, 65529, 655364, 65534, 65527, 655364, 0, 65527, 655364, 2, 65527, 655364, 2, 65523, 655360, 0, 65523, 655360, 65534, 65523, 655360, 65534, 65521, 655360, 65534, 65519, 655360, 0, 65519, 655360, 2, 65519, 655360, 2, 65521, 655360, 0, 65521, 1048576, 0, 65525, 1048576, 65534, 65525, 1048576, 2, 65525, 1048576, 2, 65517, 1048576, 0, 65517, 1048576, 65534, 65517, 1048576, 65534, 65515, 1048576, 0, 65515, 1048576, 2, 65515, 1048576, 2, 65513, 1048576, 2, 65511, 1048576, 65534, 65513, 1048576, 65534, 65511, 1048576, 0, 65513, 1048576, 0, 65511, 1048581, 2, 65509, 1048576, 0, 65509, 1048576, 65534, 65509, 1048576)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="DeathZone" parent="." instance=ExtResource("2_26h77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.4781, 0)
 
 [node name="VictoryZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09637, 0.810965, 1.52127)
