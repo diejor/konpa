@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://72dgdei85mnp"]
 
-[ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://assets/models/blocks.meshlib" id="2_rj5u4"]
+[ext_resource type="MeshLibrary" uid="uid://cvummvys5iswa" path="res://resources/blocks.meshlib" id="2_rj5u4"]
 [ext_resource type="Script" uid="uid://63q1tvjfh5vn" path="res://scripts/victory_zone.gd" id="3_5n8do"]
 [ext_resource type="PackedScene" uid="uid://4i7tn4ht17gs" path="res://scenes/ball.tscn" id="3_x27qk"]
 [ext_resource type="PackedScene" uid="uid://mat8i2d22j5e" path="res://levels/map_manager.tscn" id="4_p7y1e"]

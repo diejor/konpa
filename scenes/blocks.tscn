@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://csulm8acbpbas"]
+[gd_scene load_steps=2 format=3 uid="uid://83r5frinjpaq"]
 
-[ext_resource type="PackedScene" uid="uid://6yndiwmfjj78" path="res://assets/models/blocks.gltf" id="1_hch05"]
+[ext_resource type="PackedScene" uid="uid://cc2ec4yxb4ycq" path="res://assets/models/blocks.gltf" id="1_1t5ic"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="blocks" parent="." instance=ExtResource("1_hch05")]
+[node name="blocks" parent="." instance=ExtResource("1_1t5ic")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.72941, 0, -1.70351)

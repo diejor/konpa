@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://4i7tn4ht17gs"]
 
-[ext_resource type="Texture2D" uid="uid://ca2e4crgppbkh" path="res://assets/textures/pixar-ball.png" id="1_41u45"]
+[ext_resource type="Texture2D" uid="uid://ck65etnmamkuh" path="res://assets/textures/pixar-ball.png" id="1_41u45"]
 [ext_resource type="Script" uid="uid://cc0qhpi883v5a" path="res://scripts/player.gd" id="1_f7cbr"]
-[ext_resource type="ArrayMesh" uid="uid://b6ahns42mup01" path="res://assets/models/pixar-ball.obj" id="2_ktgx5"]
+[ext_resource type="ArrayMesh" uid="uid://cy5rmr0ffrmca" path="res://assets/models/pixar-ball.obj" id="2_ktgx5"]
 [ext_resource type="Script" uid="uid://bwdsc7p1cshqi" path="res://scripts/rotating_camera.gd" id="4_4dx81"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hgol0"]

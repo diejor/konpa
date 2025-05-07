@@ -14,7 +14,6 @@ func _process(_delta):
 		_change_scene_in_place(next_scene)
 
 func _change_scene_in_place(scene_path: String):
-	var root = get_tree().root
 	var to_change = get_parent()
 	var parent_to_change = to_change.get_parent()
 	var scene = load(scene_path).instantiate()
